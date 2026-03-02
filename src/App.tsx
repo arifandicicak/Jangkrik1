@@ -111,7 +111,7 @@ export default function App() {
     const handleMessage = (event: MessageEvent) => {
       // Validate origin
       const origin = event.origin;
-      if (!origin.endsWith('.run.app') && !origin.includes('localhost')) {
+      if (!origin.endsWith('.run.app') && !origin.includes('localhost')) && !origin.endsWith('.vercel.app') {
         return;
       }
       if (event.data?.type === 'AUTH_SUCCESS') {
