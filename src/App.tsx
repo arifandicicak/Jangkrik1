@@ -124,7 +124,8 @@ export default function App() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('/api/auth/google/url');
+      const baseUrl = window.location.origin; 
+      const res = await fetch(`${baseUrl}/api/auth/google/url`);
       if (!res.ok) throw new Error('Failed to get auth URL');
       const { url } = await res.json();
 
@@ -161,7 +162,7 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [currentSession?.messages, isTyping]);
 
-  const ai = useMemo(() => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' }), []);
+  const ai = useMemo(() => new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' }), []);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
